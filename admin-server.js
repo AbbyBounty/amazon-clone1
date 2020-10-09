@@ -6,6 +6,8 @@ const jwt=require('jsonwebtoken')
 const app=express()
 
 const morgan=require('morgan')
+const swaggerJSDoc=require('swagger-jsdoc')
+const swaggerUi=require('swagger-ui-express')
 
 const adminRouter=require('./admin/routes/admin')
 const brandRouter=require('./admin/routes/brand')
@@ -16,6 +18,25 @@ const reviewRouter=require('./admin/routes/review')
 
 app.use(bodyParser.json())
 app.use(morgan('combined'))
+
+const options = {
+    definition: {
+    //   openapi: '3.0.0', // Specification (optional, defaults to swagger: '2.0')
+      info: {
+        title: 'Amazon Server', // Title (required)
+        version: '1.0.0', // Version (required)
+        description:'this is  express server '
+      },
+    },
+    // Path to the API docs
+    apis: ['./admin/routes/*.js'],
+  };
+
+  // Initialize swagger-jsdoc -> returns validated swagger spec in json format
+const swaggerSpec = swaggerJSDoc(options);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  
 
 app.use((req,res,next)=>{
 

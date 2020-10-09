@@ -11,6 +11,19 @@ const jwt=require('jsonwebtoken')
 // -----------------------------------------
 // --------------------GET------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /admin/profile:
+ *   get:
+ *     description: profile for a admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/profile',(req,response)=>{
     const statement=`select firstName,lastName,email,phone,address,city,zip,country from admin where id='${req.userid}'`
     db.query(statement,(error,admins)=>{
@@ -34,6 +47,39 @@ router.get('/profile',(req,response)=>{
 // -----------------------------------------
 // --------------------POST------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /admin/signup:
+ *   post:
+ *     description: signup up to the admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: firstname
+ *         description: firstname of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: lastnmae
+ *         description: lastname of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: email
+ *         description: email of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: password of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/signup',(req,res)=>{
 
     const {firstname,lastname,email,password}=req.body
@@ -46,6 +92,29 @@ router.post('/signup',(req,res)=>{
     
 })
 
+/**
+ * @swagger
+ *
+ * /admin/signin:
+ *   post:
+ *     description: signin up to the admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: email
+ *         description: email of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: password of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/signin', (request, response) => {
     const { email, password } = request.body
   

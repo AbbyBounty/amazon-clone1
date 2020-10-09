@@ -12,6 +12,19 @@ const jwt=require('jsonwebtoken')
 // -----------------------------------------
 // --------------------GET------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /brand:
+ *   get:
+ *     description: brand for a admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/',(req,res)=>{
     const statement='select * from brand'
     db.query(statement,(error,data)=>{
@@ -50,6 +63,19 @@ router.put('/:id',(req,res)=>{
 // -----------------------------------------
 // --------------------DELETE------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /brand/:id:
+ *   delete:
+ *     description: profile for a admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.delete('/:id',(req,res)=>{
     const {id}=req.params
     const statement=`delete from  brand  where id='${id}'`
