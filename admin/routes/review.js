@@ -11,6 +11,19 @@ const jwt=require('jsonwebtoken')
 // -----------------------------------------
 // --------------------GET------------------
 // -----------------------------------------
+  /**
+ * @swagger
+ *
+ * /review/:id:
+ *   get:
+ *     description: get all reviews
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/:id',(req,res)=>{
     const {id}=req.params
     const statement=`select * from productReview where productid='${id}'`

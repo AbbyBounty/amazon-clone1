@@ -12,6 +12,19 @@ const upload = multer({ dest: 'images/' })
 // -----------------------------------------
 // --------------------GET------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /product:
+ *   get:
+ *     description: get all  products
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.get('/',(request,response)=>{
 
 const statement=` select p.id, p.title, p.description, 
@@ -63,6 +76,19 @@ db.query(statement,(error,data)=>{
 // -----------------------------------------
 // --------------------POST------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /product/upload-image/:id:
+ *   post:
+ *     description: add product image
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 
 router.post('/upload-image/:id',upload.single('image'), (req,res)=>{
   const {id}=req.params
@@ -75,6 +101,44 @@ router.post('/upload-image/:id',upload.single('image'), (req,res)=>{
 
 })
 
+/**
+ * @swagger
+ *
+ * /product/create:
+ *   post:
+ *     description: add category
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         description: titile for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: description
+ *         description: description for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: category
+ *         description: add category for product.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: price
+ *         description: add price for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: brand
+ *         description: add brand for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/create',(req,res)=>{
     const {title,description,category,price,brand}=req.body
     const statement=`insert into product (title, description, category, price, brand) values (
@@ -89,6 +153,44 @@ router.post('/create',(req,res)=>{
 // -----------------------------------------
 // ---------------------PUT-----------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /product/:id:
+ *   post:
+ *     description: update category
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         description: update titile for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: description
+ *         description: description for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: category
+ *         description: update category for product.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: price
+ *         description: update price for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: brand
+ *         description: update brand for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.put('/:id', (request, response) => {
     const {id} = request.params
     const {title, description, category, price, brand} = request.body
@@ -104,6 +206,45 @@ router.put('/:id', (request, response) => {
     })
   })
 
+
+  /**
+ * @swagger
+ *
+ * /product/update-state/:id/:isActive:
+ *   post:
+ *     description: update active state of product
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         description: update titile for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: description
+ *         description: description for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: category
+ *         description: update category for product.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: price
+ *         description: update price for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: brand
+ *         description: update brand for product .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
   router.put('/update-state/:id/:isActive', (request, response) => {
     const {id,isActive} = request.params
     const {title, description, category, price, brand} = request.body
@@ -121,6 +262,19 @@ router.put('/:id', (request, response) => {
 // -----------------------------------------
 // --------------------DELETE------------------
 // -----------------------------------------
+  /**
+ * @swagger
+ *
+ * /product/:id:
+ *   post:
+ *     description: delete a product
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.delete('/:id', (request, response) => {
     const {id} = request.params
     const statement = `delete from product where id = ${id}`
