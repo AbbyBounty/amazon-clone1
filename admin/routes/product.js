@@ -17,7 +17,7 @@ router.get('/',(request,response)=>{
 const statement=` select p.id, p.title, p.description, 
 c.id as categoryId, c.title as categoryTitle,
 b.id as brandId, b.title as brandTitle,
-p.price, p.image from product p
+p.price, p.image,p.isActive from product p
 inner join category c on c.id = p.category
 inner join brand b on b.id = p.brand`
 db.query(statement,(error,data)=>{
@@ -36,6 +36,7 @@ db.query(statement,(error,data)=>{
             title: tmpProduct['title'],
             description: tmpProduct['description'],
             price: tmpProduct['price'],
+            isActive:tmpProduct['isActive'],
 
             brand: {
               id: tmpProduct['brandId'],
@@ -103,6 +104,19 @@ router.put('/:id', (request, response) => {
     })
   })
 
+  router.put('/update-state/:id/:isActive', (request, response) => {
+    const {id,isActive} = request.params
+    const {title, description, category, price, brand} = request.body
+    const statement = `update product set 
+      isActive=${isActive}
+    where id = ${id}`
+    db.query(statement, (error, data) => {
+      response.send(utils.createResult(error, data))
+    })
+  })
+
+
+
 
 // -----------------------------------------
 // --------------------DELETE------------------
@@ -114,6 +128,8 @@ router.delete('/:id', (request, response) => {
       response.send(utils.createResult(error, data))
     })
   })
+
+  
 
 
 module.exports=router
