@@ -37,6 +37,29 @@ router.get('/',(req,res)=>{
 // -----------------------------------------
 // --------------------POST------------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /brand:
+ *   post:
+ *     description: signup up to the admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         description: titile for brand  .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: description
+ *         description: description for brand .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.post('/',(req,res)=>{
     const {title,description}=req.body
     const statement=`insert into brand (title,description) values ('${title}','${description}')`
@@ -50,6 +73,29 @@ router.post('/',(req,res)=>{
 // -----------------------------------------
 // ---------------------PUT-----------------
 // -----------------------------------------
+/**
+ * @swagger
+ *
+ * /brand/:id:
+ *   put:
+ *     description: signup up to the admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: title
+ *         description: titile for brand  .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: description
+ *         description: description for brand .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
 router.put('/:id',(req,res)=>{
     const {id}=req.params
     const {title,description}=req.body

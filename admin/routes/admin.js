@@ -152,7 +152,7 @@ router.post('/signin', (request, response) => {
 /**
  * @swagger
  *
- * /admin/profile:
+ * /admin/profile/:id:
  *   put:
  *     description: update profile of an admin
  *     produces:
