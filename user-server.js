@@ -9,12 +9,12 @@ const swaggerJSDoc=require('swagger-jsdoc')
 const swaggerUi=require('swagger-ui-express')
 
 app.use(express.static('images/'))
-const adminRouter=require('./admin/routes/admin')
-const brandRouter=require('./admin/routes/brand')
-const categoryRouter=require('./admin/routes/category')
-const orderRouter=require('./admin/routes/order')
-const productRouter=require('./admin/routes/product')
-const reviewRouter=require('./admin/routes/review')
+const adminRouter=require('./user/routes/user')
+const brandRouter=require('./user/routes/brand')
+const categoryRouter=require('./user/routes/category')
+const orderRouter=require('./user/routes/order')
+const productRouter=require('./user/routes/product')
+const reviewRouter=require('./user/routes/review')
 
 app.use(bodyParser.json())
 app.use(morgan('combined'))
@@ -29,7 +29,7 @@ const options = {
       },
     },
     // Path to the API docs
-    apis: ['./admin/routes/*.js'],
+    apis: ['./user/routes/*.js'],
   };
 
   // Initialize swagger-jsdoc -> returns validated swagger spec in json format
@@ -40,7 +40,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req,res,next)=>{
 
-    if(req.url=='/admin/signin' || req.url=='/admin/signup' || req.url=='/1f1b25facf7d435d5721b9420d756590'){
+    if(req.url=='/user/signin' || req.url=='/user/signup' || req.url=='/1f1b25facf7d435d5721b9420d756590'){
         next()
     }
     else{
@@ -58,7 +58,7 @@ app.use((req,res,next)=>{
     }
 })
 
-app.use('/admin', adminRouter)
+app.use('/user', adminRouter)
 app.use('/brand',brandRouter)
 app.use('/category',categoryRouter)
 app.use('/order',orderRouter)
@@ -70,6 +70,6 @@ app.get('/',(req,res)=>{
 })
 
  
-app.listen(3000,'0.0.0.0',()=>{
+app.listen(4000,'0.0.0.0',()=>{
     console.log('server started')
 })
