@@ -149,8 +149,72 @@ router.post('/signin', (request, response) => {
 // -----------------------------------------
 // ---------------------PUT-----------------
 // -----------------------------------------
-router.put('/',(req,res)=>{
-    
+/**
+ * @swagger
+ *
+ * /admin/profile:
+ *   put:
+ *     description: update profile of an admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+  *       - name: firstname
+ *         description: firstname of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: lastnmae
+ *         description: lastname of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: email
+ *         description: email of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: password of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: address
+ *         description: address of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: city
+ *         description: city of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: country
+ *         description: country of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: zip
+ *         description: zip of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: phone
+ *         description: phone of admin .
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: successful message
+ */
+router.put('/profile/:id',(req,res)=>{
+  const{id}=req.params
+  const {firstname,lastname,email,password,address,city,country,zip,phone}=req.body
+  const encryptedPwd=crypto.SHA256(password)
+  const statement=`update admin set firstName='${firstname}',lastName='${lastname}',email='${email}',password='${encryptedPwd}',address='${address}',city='${city}',country='${country}',zip='${zip}',phone='${phone}' where id='${id}'`
+  db.query(statement,(error,data)=>{
+    res.send(utils.createResult(error,data))
+})
 })
 
 
