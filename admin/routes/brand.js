@@ -42,7 +42,7 @@ router.get('/',(req,res)=>{
  *
  * /brand:
  *   post:
- *     description: signup up to the admin
+ *     description: add brand
  *     produces:
  *       - application/json
  *     parameters:
@@ -78,7 +78,7 @@ router.post('/',(req,res)=>{
  *
  * /brand/:id:
  *   put:
- *     description: signup up to the admin
+ *     description: update brand
  *     produces:
  *       - application/json
  *     parameters:
@@ -114,7 +114,7 @@ router.put('/:id',(req,res)=>{
  *
  * /brand/:id:
  *   delete:
- *     description: profile for a admin
+ *     description: delete brand
  *     produces:
  *       - application/json
  *     parameters:
