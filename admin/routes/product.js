@@ -6,7 +6,9 @@ const config=require('../../config')
 const router=express.Router()
 const crypto=require('crypto-js')
 const jwt=require('jsonwebtoken')
+const multer=require('multer')
 
+const upload = multer({ dest: 'images/' })
 // -----------------------------------------
 // --------------------GET------------------
 // -----------------------------------------
@@ -60,6 +62,18 @@ db.query(statement,(error,data)=>{
 // -----------------------------------------
 // --------------------POST------------------
 // -----------------------------------------
+
+router.post('/upload-image/:id',upload.single('image'), (req,res)=>{
+  const {id}=req.params
+  const fileName=req.file.filename
+  const statement=`update product set image='${fileName}' where id='${id}'`
+  
+  db.query(statement,(error,data)=>{
+    res.send(utils.createResult(error,data))
+})
+
+})
+
 router.post('/create',(req,res)=>{
     const {title,description,category,price,brand}=req.body
     const statement=`insert into product (title, description, category, price, brand) values (

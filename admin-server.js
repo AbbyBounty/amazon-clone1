@@ -1,4 +1,3 @@
-
 const express=require('express')
 const bodyParser=require('body-parser')
 const config=require('./config')
@@ -9,6 +8,7 @@ const morgan=require('morgan')
 const swaggerJSDoc=require('swagger-jsdoc')
 const swaggerUi=require('swagger-ui-express')
 
+app.use(express.static('images/'))
 const adminRouter=require('./admin/routes/admin')
 const brandRouter=require('./admin/routes/brand')
 const categoryRouter=require('./admin/routes/category')
@@ -40,7 +40,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req,res,next)=>{
 
-    if(req.url=='/admin/signin' || req.url=='/admin/signup'){
+    if(req.url=='/admin/signin' || req.url=='/admin/signup' || req.url=='/1f1b25facf7d435d5721b9420d756590'){
         next()
     }
     else{

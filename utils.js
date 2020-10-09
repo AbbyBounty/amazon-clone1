@@ -12,7 +12,7 @@ function createError(error){
 function createSuccess(data){
     
     const result={}
-    result['status']='error'
+    result['status']='succes'
     result['data']=data
     return result
 }
