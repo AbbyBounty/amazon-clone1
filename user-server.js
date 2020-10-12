@@ -26,7 +26,10 @@ app.use('/user', userRouter)
 
 app.use((req,res,next)=>{
 
-    if(req.url=='/user/signin' || req.url=='/user/signup' || req.url.startsWith('/activate')){
+    if(req.url=='/user/signin' || 
+    req.url=='/user/signup' || 
+    req.url.startsWith('/activate') ||
+    req.url=='/logo.png'){
         next()
     }
     else{
