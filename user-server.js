@@ -16,6 +16,8 @@ app.use(bodyParser.json())
 // app.use(morgan('combined'))
 
 
+app.use('/user', userRouter)
+
 
 
 
@@ -24,7 +26,7 @@ app.use(bodyParser.json())
 
 app.use((req,res,next)=>{
 
-    if(req.url=='/user/signin' || req.url=='/user/signup' || req.url=='/1f1b25facf7d435d5721b9420d756590'){
+    if(req.url=='/user/signin' || req.url=='/user/signup' || req.url.startsWith('/activate')){
         next()
     }
     else{
@@ -36,13 +38,13 @@ app.use((req,res,next)=>{
          next()
         }
         catch(ex){
-            response.status(401)
-            response.send({ status: 'error', error: 'protected api' })
+            res.status(401)
+            res.send({ status: 'error', error: 'protected api' })
         }
     }
 })
 
-app.use('/user', userRouter)
+
 
 
 app.get('/',(req,res)=>{
