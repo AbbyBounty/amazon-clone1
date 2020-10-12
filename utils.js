@@ -16,8 +16,15 @@ function createSuccess(data){
     result['data']=data
     return result
 }
+function OTP(){
+    const min=10000
+    const max=99999
+    return Math.floor(Math.random()*(max-min)+min)
+}
+
 module.exports={
     createResult:createResult,
     createError:createError,
-    createSuccess:createSuccess
+    createSuccess:createSuccess,
+    OTP:OTP
 }

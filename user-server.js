@@ -29,7 +29,10 @@ app.use((req,res,next)=>{
     if(req.url=='/user/signin' || 
     req.url=='/user/signup' || 
     req.url.startsWith('/activate') ||
-    req.url=='/logo.png'){
+    req.url==('/logo.png')||
+    req.url==('/user/forget-password')
+    )
+    {
         next()
     }
     else{
@@ -48,7 +51,7 @@ app.use((req,res,next)=>{
 })
 
 
-
+app.use(express.static('images/'))
 
 app.get('/',(req,res)=>{
     res.send('welcome you ')
