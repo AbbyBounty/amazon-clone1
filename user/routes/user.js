@@ -18,9 +18,9 @@ const mailer=require('../../mailer')
 // --------------POST-----------------------
 // ----------------------------------------
 router.post('/signup',(req,response)=>{
-    const {firstname,lastname,email,password}=req.body
+    const {firstName,lastName,email,password}=req.body
     const pwd=crypto.SHA256(password)
-    const statement=`insert into user(firstname,lastname,email,password) values ('${firstname}','${lastname}','${email}','${pwd}'`
+    const statement=`insert into user(firstName,lastName,email,password) values ('${firstName}','$Nlastname}','${email}','${pwd}'`
     db.query(statement,(error,data)=>{
         mailer.sendEmail(email, 'Welcome to mystore','<h1>welcome</h1>',  (error, info) => {
             console.log(error)
