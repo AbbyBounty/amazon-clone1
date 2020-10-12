@@ -17,6 +17,7 @@
     "mysql2": "^2.2.5",
     "nodemailer": "^6.4.13",
     "swagger-jsdoc": "^4.2.3",
-    "swagger-ui-express": "^4.1.4"
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.1"
   }
 }
