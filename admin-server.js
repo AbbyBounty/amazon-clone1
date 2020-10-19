@@ -15,9 +15,12 @@ const categoryRouter=require('./admin/routes/category')
 const orderRouter=require('./admin/routes/order')
 const productRouter=require('./admin/routes/product')
 const reviewRouter=require('./admin/routes/review')
-
+const userRouter=require('./admin/routes/user')
+const cors=require('cors')
 app.use(bodyParser.json())
 app.use(morgan('combined'))
+
+app.use(cors())
 
 const options = {
     definition: {
@@ -64,6 +67,8 @@ app.use('/category',categoryRouter)
 app.use('/order',orderRouter)
 app.use('/product',productRouter)
 app.use('/review',reviewRouter)
+app.use('/user',userRouter)
+
 
 app.get('/',(req,res)=>{
     res.send('welcome you ')
